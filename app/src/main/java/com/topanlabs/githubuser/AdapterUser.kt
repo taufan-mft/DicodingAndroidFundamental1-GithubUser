@@ -13,7 +13,6 @@ import de.hdodenhof.circleimageview.CircleImageView
 class AdapterUser(private val listUser: ArrayList<UserData>) : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        //TODO: find view by id
         var imgView: CircleImageView = itemView.findViewById(R.id.img_photo)
         var tvName: TextView = itemView.findViewById(R.id.txt_name)
         var tvDesc: TextView = itemView.findViewById(R.id.txt_description)
