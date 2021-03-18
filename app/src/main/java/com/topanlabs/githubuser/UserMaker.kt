@@ -5,9 +5,9 @@ import android.content.res.Resources
 
 class UserMaker(val context: Context) {
 
-    var names = context.resources.getStringArray(R.array.name)
-    var followers = context.resources.getStringArray(R.array.followers)
-    var dataPhoto = context.resources.obtainTypedArray(R.array.avatar)
+    val names = context.resources.getStringArray(R.array.name)
+    val followers = context.resources.getStringArray(R.array.followers)
+    val dataPhoto = context.resources.obtainTypedArray(R.array.avatar)
     val followings = context.resources.getStringArray(R.array.following)
     val cities = context.resources.getStringArray(R.array.location)
     val companies = context.resources.getStringArray(R.array.company)
