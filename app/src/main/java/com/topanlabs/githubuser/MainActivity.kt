@@ -24,7 +24,6 @@ import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity() {
-    var list: ArrayList<UserData> = arrayListOf()
     private lateinit var rvMobil: RecyclerView
     private lateinit var searchView: EditText
     private lateinit var mainViewModel: MainViewModel
@@ -45,7 +44,9 @@ class MainActivity : AppCompatActivity() {
             if (weatherItems != null) {
                 Log.d("FARIN", (weatherItems.toString()))
                 listUserAdapter.setData(weatherItems)
-                changeLoading()
+                isLoading = false
+                pBar.visibility = View.GONE
+                rvMobil.visibility = View.VISIBLE
             }
         })
 
@@ -82,11 +83,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeLoading() {
         if (isLoading) {
-            isLoading = !isLoading
+            isLoading = false
             pBar.visibility = View.GONE
             rvMobil.visibility = View.VISIBLE
         } else {
-            isLoading = !isLoading
+            isLoading = true
             rvMobil.visibility = View.GONE
             pBar.visibility = View.VISIBLE
 

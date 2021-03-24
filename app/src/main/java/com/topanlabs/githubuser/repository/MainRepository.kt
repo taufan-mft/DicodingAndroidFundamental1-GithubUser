@@ -40,19 +40,13 @@ class MainRepository(val username: String = "") {
         }
     }
 
-    fun getUser(): UserModel? {
+    suspend fun getUser(): UserModel? {
         var user: UserModel? = null
-        val call = githubApi.getUser(username)
-        call.enqueue(object: Callback<UserModel> {
-            override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
-                user = response.body()
-
-            }
-
-            override fun onFailure(call: Call<UserModel>, t: Throwable) {
-                Log.d(BASE_TAG, "Error get user")
-            }
-        })
+        try{
+            user = githubApi.getUser(username)
+        } catch(e: Exception){
+            return null
+        }
         return user
     }
 

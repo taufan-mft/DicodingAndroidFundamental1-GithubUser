@@ -18,7 +18,6 @@ class AdapterUser() : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imgView: CircleImageView = itemView.findViewById(R.id.img_photo)
         var tvName: TextView = itemView.findViewById(R.id.txt_name)
-        var tvDesc: TextView = itemView.findViewById(R.id.txt_description)
         val rootlayout: ConstraintLayout = itemView.findViewById(R.id.rlayout)
     }
     fun setData(items: ArrayList<Item>) {
@@ -45,12 +44,11 @@ class AdapterUser() : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
             .load(user.avatarUrl)
             .into(holder.imgView)
         holder.tvName.text = user.login
-        holder.tvDesc.text = "-"
-     /*   holder.rootlayout.setOnClickListener {
+       holder.rootlayout.setOnClickListener {
             val intent: Intent = Intent(holder.imgView.context, DetailActivity::class.java)
-            intent.putExtra("user", user)
+            intent.putExtra(DetailActivity.IN_USERNAME, user.login)
             holder.imgView.context.startActivity(intent)
-        }*/
+        }
     }
 
     override fun getItemCount(): Int {
