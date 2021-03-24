@@ -14,9 +14,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class MainRepository {
+class MainRepository(val username: String = "") {
     val BASE_TAG = "MAINREPO"
     val BASE_URL = "https://api.github.com"
+
     val gson= GsonBuilder()
         .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
         .create()
@@ -27,23 +28,19 @@ class MainRepository {
 
    val githubApi: EndpointInterface = retrofit.create(EndpointInterface::class.java)
 
-    fun searchUser(username: String): SearchModel? {
+    suspend fun searchUser(username: String): SearchModel? {
+        Log.d(BASE_TAG, "LAGI NYARI")
         var search: SearchModel? = null
-        val call = githubApi.searchUser(username)
-        call.enqueue(object: Callback<SearchModel> {
-            override fun onResponse(call: Call<SearchModel>, response: Response<SearchModel>) {
-               search = response.body()
+        try {
 
-            }
-
-            override fun onFailure(call: Call<SearchModel>, t: Throwable) {
-               Log.d(BASE_TAG, "Error search user")
-            }
-        })
-        return search
+            val call: SearchModel = githubApi.searchUser(username)
+            return call
+        } catch(e: Exception) {
+            return null
+        }
     }
 
-    fun getUser(username: String): UserModel? {
+    fun getUser(): UserModel? {
         var user: UserModel? = null
         val call = githubApi.getUser(username)
         call.enqueue(object: Callback<UserModel> {
@@ -59,7 +56,7 @@ class MainRepository {
         return user
     }
 
-    fun getFollowers(username: String): List<FollowersModelItem>? {
+    fun getFollowers(): List<FollowersModelItem>? {
         var followers: List<FollowersModelItem>? = listOf()
         val call = githubApi.getUserFollowers(username)
         call.enqueue(object: Callback<List<FollowersModelItem>> {
@@ -74,7 +71,7 @@ class MainRepository {
         })
         return followers
     }
-    fun getFollowing(username: String): List<FollowingModel>? {
+    fun getFollowing(): List<FollowingModel>? {
         var following: List<FollowingModel>? = listOf()
         val call = githubApi.getUserFollowing(username)
         call.enqueue(object: Callback<List<FollowingModel>> {
