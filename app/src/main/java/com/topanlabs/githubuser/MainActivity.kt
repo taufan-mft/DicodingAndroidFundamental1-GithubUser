@@ -12,6 +12,7 @@ import android.view.View
 import android.view.View.GONE
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -29,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var listUserAdapter: AdapterUser
     private lateinit  var pBar: ProgressBar
+    private lateinit var petunjuk: TextView
+    private lateinit var gaketemu: TextView
     private var isLoading = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,14 +42,22 @@ class MainActivity : AppCompatActivity() {
         listUserAdapter = AdapterUser()
         rvMobil.adapter = listUserAdapter
         pBar = findViewById(R.id.progressBar)
+        petunjuk = findViewById(R.id.petunjuk)
+        gaketemu = findViewById(R.id.gaketemu)
         mainViewModel.getWeathers().observe(this, { weatherItems ->
 
             if (weatherItems != null) {
-                Log.d("FARIN", (weatherItems.toString()))
-                listUserAdapter.setData(weatherItems)
-                isLoading = false
-                pBar.visibility = View.GONE
-                rvMobil.visibility = View.VISIBLE
+                if (weatherItems.isNotEmpty()) {
+                    listUserAdapter.setData(weatherItems)
+                    isLoading = false
+                    pBar.visibility = View.GONE
+                    rvMobil.visibility = View.VISIBLE
+                    gaketemu.visibility=View.GONE
+                } else {
+                    rvMobil.visibility = View.GONE
+                    gaketemu.visibility = View.VISIBLE
+                    pBar.visibility= View.GONE
+                }
             }
         })
 
@@ -61,22 +72,29 @@ class MainActivity : AppCompatActivity() {
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            /*
-            Gunakan method ini ketika search selesai atau OK
-             */
             override fun onQueryTextSubmit(query: String): Boolean {
+                petunjuk.visibility=View.GONE
                 changeLoading()
                 val text = query
                 mainViewModel.doSearch(text)
                 return true
             }
-
-            /*
-            Gunakan method ini untuk merespon tiap perubahan huruf pada searchView
-             */
             override fun onQueryTextChange(newText: String): Boolean {
                 return false
             }
+        })
+        searchView.addOnAttachStateChangeListener(object: View.OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(p0: View?) {
+
+            }
+
+            override fun onViewDetachedFromWindow(p0: View?) {
+                petunjuk.visibility=View.VISIBLE
+                rvMobil.visibility=View.GONE
+                gaketemu.visibility = View.GONE
+                pBar.visibility = View.GONE
+            }
+
         })
         return true
     }
@@ -86,6 +104,7 @@ class MainActivity : AppCompatActivity() {
             isLoading = false
             pBar.visibility = View.GONE
             rvMobil.visibility = View.VISIBLE
+            gaketemu.visibility = View.GONE
         } else {
             isLoading = true
             rvMobil.visibility = View.GONE

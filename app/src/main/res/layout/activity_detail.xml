@@ -155,12 +155,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:text="followers"
+                android:text="@string/followers"
                 android:textAlignment="center" />
         </LinearLayout>
 
         <View
-            android:id="@+id/divider3"
             android:layout_width="1dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
@@ -189,7 +188,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:text="following"
+                android:text="@string/following"
                 android:textAlignment="center" />
         </LinearLayout>
         <View

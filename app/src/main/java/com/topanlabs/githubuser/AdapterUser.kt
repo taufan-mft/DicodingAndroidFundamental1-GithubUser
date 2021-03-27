@@ -2,6 +2,7 @@ package com.topanlabs.githubuser
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.topanlabs.githubuser.model.FollowersModelItem
+import com.topanlabs.githubuser.model.FollowingModel
 import com.topanlabs.githubuser.model.Item
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -25,10 +28,24 @@ class AdapterUser() : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
         listUser.addAll(items)
         notifyDataSetChanged()
     }
-    fun clearData() {
+    fun setFollowingData(items: ArrayList<FollowingModel>) {
         listUser.clear()
+        for (foll in items) {
+            val item = Item(login=foll.login, avatarUrl = foll.avatarUrl)
+            listUser.add(item)
+        }
         notifyDataSetChanged()
     }
+
+    fun setFollowersData(items: ArrayList<FollowersModelItem>) {
+        listUser.clear()
+        for (foll in items) {
+            val item = Item(login=foll.login, avatarUrl = foll.avatarUrl)
+            listUser.add(item)
+        }
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(
             R.layout.item_row_user,

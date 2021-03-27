@@ -58,9 +58,9 @@ class DetailActivity : AppCompatActivity() {
         linLay = findViewById(R.id.linearLayout)
         pBar = findViewById(R.id.progressBar)
         username = intent.getStringExtra(IN_USERNAME)
-        mainRepository = MainRepository(username=username!!)
+        mainRepository = MainRepository()
         loadData()
-        val sectionsPagerAdapter = SectionsPagerAdapter(this)
+        val sectionsPagerAdapter = SectionsPagerAdapter(this, username!!)
         val viewPager: ViewPager2 = findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
@@ -78,7 +78,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun loadData() {
         GlobalScope.launch(Dispatchers.Main)  {
-            var user = mainRepository.getUser()
+            var user = mainRepository.getUser(username=username!!)
             user?.apply {
                 tvName.text = name
                 tvUName.text = login

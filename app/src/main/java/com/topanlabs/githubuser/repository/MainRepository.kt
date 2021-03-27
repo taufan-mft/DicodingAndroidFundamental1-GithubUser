@@ -14,8 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class MainRepository(val username: String = "") {
-    val BASE_TAG = "MAINREPO"
+class MainRepository() {
     val BASE_URL = "https://api.github.com"
 
     val gson= GsonBuilder()
@@ -29,7 +28,6 @@ class MainRepository(val username: String = "") {
    val githubApi: EndpointInterface = retrofit.create(EndpointInterface::class.java)
 
     suspend fun searchUser(username: String): SearchModel? {
-        Log.d(BASE_TAG, "LAGI NYARI")
         var search: SearchModel? = null
         try {
 
@@ -40,7 +38,7 @@ class MainRepository(val username: String = "") {
         }
     }
 
-    suspend fun getUser(): UserModel? {
+    suspend fun getUser(username: String): UserModel? {
         var user: UserModel? = null
         try{
             user = githubApi.getUser(username)
@@ -50,34 +48,22 @@ class MainRepository(val username: String = "") {
         return user
     }
 
-    fun getFollowers(): List<FollowersModelItem>? {
-        var followers: List<FollowersModelItem>? = listOf()
-        val call = githubApi.getUserFollowers(username)
-        call.enqueue(object: Callback<List<FollowersModelItem>> {
-            override fun onResponse(call: Call<List<FollowersModelItem>>, response: Response<List<FollowersModelItem>>) {
-                followers = response.body()
+    suspend fun getFollowers(username: String): ArrayList<FollowersModelItem>? {
+        var followers: ArrayList<FollowersModelItem>? = ArrayList()
+        try {
+            followers = githubApi.getUserFollowers(username)
+        } catch (e: Exception) {
 
-            }
-
-            override fun onFailure(call: Call<List<FollowersModelItem>>, t: Throwable) {
-                Log.d(BASE_TAG, "Error get user")
-            }
-        })
+    }
         return followers
     }
-    fun getFollowing(): List<FollowingModel>? {
-        var following: List<FollowingModel>? = listOf()
-        val call = githubApi.getUserFollowing(username)
-        call.enqueue(object: Callback<List<FollowingModel>> {
-            override fun onResponse(call: Call<List<FollowingModel>>, response: Response<List<FollowingModel>>) {
-                following = response.body()
+    suspend fun getFollowing(username: String): ArrayList<FollowingModel>? {
+        var following: ArrayList<FollowingModel>? = ArrayList()
+        try {
+           following = githubApi.getUserFollowing(username)
+        } catch(e: Exception) {
 
-            }
-
-            override fun onFailure(call: Call<List<FollowingModel>>, t: Throwable) {
-                Log.d(BASE_TAG, "Error get user")
-            }
-        })
+        }
         return following
     }
 }

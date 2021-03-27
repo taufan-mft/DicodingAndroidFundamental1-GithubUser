@@ -5,7 +5,25 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/petunjuk"
+        android:id="@+id/petunjuk"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="8dp"
+        android:visibility="gone"
+        android:text="@string/gaketemu"
+        android:id="@+id/gaketemu"
+        />
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
@@ -17,5 +35,6 @@
         android:id="@+id/rv_heroes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_row_user" />
+        tools:listitem="@layout/item_row_user"
+        android:visibility="gone"/>
 </LinearLayout>
