@@ -87,11 +87,15 @@ class DetailActivity : AppCompatActivity() {
             if (isLiked) {
                 fButton.setColorFilter(Color.BLACK)
                 userViewModel.delete(userEntity)
+                isLiked = false
             } else {
                 val user = UserEntity(username = username!!, photo = photourl)
                 userViewModel.insert(user)
                 isLiked = true
                 fButton.setColorFilter(Color.WHITE)
+                GlobalScope.launch(Dispatchers.Main) {
+                    userEntity = userViewModel.getUser(username!!)
+                }
             }
         }
     }
