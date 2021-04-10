@@ -6,11 +6,11 @@
     tools:context=".fragments.FollowingFragment">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="8dp"
@@ -27,7 +27,7 @@
             android:padding="8dp" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_main"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_row_user" />

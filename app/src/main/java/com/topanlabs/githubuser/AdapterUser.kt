@@ -1,28 +1,28 @@
 package com.topanlabs.githubuser
 
-import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.topanlabs.githubuser.db.UserEntity
 import com.topanlabs.githubuser.model.FollowersModelItem
 import com.topanlabs.githubuser.model.FollowingModel
 import com.topanlabs.githubuser.model.Item
 import de.hdodenhof.circleimageview.CircleImageView
 
-class AdapterUser() : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
+class AdapterUser : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
     private val listUser: ArrayList<Item> = ArrayList()
+
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imgView: CircleImageView = itemView.findViewById(R.id.img_photo)
         var tvName: TextView = itemView.findViewById(R.id.txt_name)
         val rootlayout: ConstraintLayout = itemView.findViewById(R.id.rlayout)
     }
+
     fun setData(items: ArrayList<Item>) {
         listUser.clear()
         listUser.addAll(items)
@@ -40,7 +40,16 @@ class AdapterUser() : RecyclerView.Adapter<AdapterUser.ListViewHolder>() {
     fun setFollowersData(items: ArrayList<FollowersModelItem>) {
         listUser.clear()
         for (foll in items) {
-            val item = Item(login=foll.login, avatarUrl = foll.avatarUrl)
+            val item = Item(login = foll.login, avatarUrl = foll.avatarUrl)
+            listUser.add(item)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun setFavoriteData(items: List<UserEntity>) {
+        listUser.clear()
+        for (user in items) {
+            val item = Item(login = user.username, avatarUrl = user.photo)
             listUser.add(item)
         }
         notifyDataSetChanged()

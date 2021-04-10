@@ -1,23 +1,18 @@
 package com.topanlabs.githubuser.repository
 
-import android.util.Log
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.topanlabs.githubuser.model.FollowersModelItem
 import com.topanlabs.githubuser.model.FollowingModel
 import com.topanlabs.githubuser.model.SearchModel
 import com.topanlabs.githubuser.model.UserModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class MainRepository() {
+class MainRepository {
     val BASE_URL = "https://api.github.com"
 
-    val gson= GsonBuilder()
+    val gson = GsonBuilder()
         .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
         .create()
     val retrofit: Retrofit = Retrofit.Builder()

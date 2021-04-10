@@ -1,5 +1,4 @@
 package com.topanlabs.githubuser.fragments
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
