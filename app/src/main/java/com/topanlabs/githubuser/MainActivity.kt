@@ -2,26 +2,20 @@ package com.topanlabs.githubuser
 
 import android.app.SearchManager
 import android.content.Context
-import android.opengl.Visibility
+import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.view.View.GONE
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.topanlabs.githubuser.viewmodel.MainViewModel
-import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -83,20 +77,34 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-        searchView.addOnAttachStateChangeListener(object: View.OnAttachStateChangeListener {
+        searchView.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
             override fun onViewAttachedToWindow(p0: View?) {
 
             }
 
             override fun onViewDetachedFromWindow(p0: View?) {
-                petunjuk.visibility=View.VISIBLE
-                rvMobil.visibility=View.GONE
+                petunjuk.visibility = View.VISIBLE
+                rvMobil.visibility = View.GONE
                 gaketemu.visibility = View.GONE
                 pBar.visibility = View.GONE
             }
 
         })
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.fav -> {
+                val intent = Intent(this, FavoriteActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.settings -> {
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun changeLoading() {

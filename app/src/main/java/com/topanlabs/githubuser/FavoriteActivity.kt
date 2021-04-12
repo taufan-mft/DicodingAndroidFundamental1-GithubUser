@@ -21,9 +21,16 @@ class FavoriteActivity : AppCompatActivity() {
         listUserAdapter = AdapterUser()
         rvFavorite.adapter = listUserAdapter
         rvFavorite.layoutManager = LinearLayoutManager(this)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = getString(R.string.favorites)
         userViewModel.allLikedUsers.observe(this) { users ->
             users.let { listUserAdapter.setFavoriteData(it) }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

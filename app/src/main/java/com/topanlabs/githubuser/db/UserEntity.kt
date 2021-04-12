@@ -5,8 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = UserDao.TABLE_NAME)
 data class UserEntity(
-
-
     val username: String,
     val photo: String
 ) {
