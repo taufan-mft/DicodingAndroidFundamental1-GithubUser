@@ -25,6 +25,7 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         // This method is called when the BroadcastReceiver is receiving an Intent broadcast.
         val message = intent.getStringExtra(EXTRA_MESSAGE)
+        TODO("SHOW NOTIFICATION WITH MESSAGE")
     }
 
     fun setRepeatingAlarm(context: Context, message: String) {

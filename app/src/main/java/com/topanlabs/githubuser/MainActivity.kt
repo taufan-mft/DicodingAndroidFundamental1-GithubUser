@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +19,6 @@ import com.topanlabs.githubuser.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var rvMobil: RecyclerView
-    private lateinit var searchView: EditText
     private lateinit var mainViewModel: MainViewModel
     private lateinit var listUserAdapter: AdapterUser
     private lateinit  var pBar: ProgressBar
