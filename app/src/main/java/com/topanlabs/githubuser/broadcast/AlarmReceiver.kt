@@ -23,15 +23,16 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        // This method is called when the BroadcastReceiver is receiving an Intent broadcast.
-        val message = intent.getStringExtra(EXTRA_MESSAGE)
-        TODO("SHOW NOTIFICATION WITH MESSAGE")
+        showAlarmNotification(
+            context, title = context.getString(R.string.check_out), message = context.getString(
+                R.string.something_new
+            ), notifId = 100
+        )
     }
 
-    fun setRepeatingAlarm(context: Context, message: String) {
+    fun setRepeatingAlarm(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
-        intent.putExtra(EXTRA_MESSAGE, message)
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, 9)
         calendar.set(Calendar.MINUTE, 0)

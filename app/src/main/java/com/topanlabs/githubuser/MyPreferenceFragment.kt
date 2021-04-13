@@ -44,7 +44,7 @@ class MyPreferenceFragment : PreferenceFragmentCompat(),
             reminderPreference.isChecked = sh!!.getBoolean(REMINDER_KEY, false)
             val enabled = sh.getBoolean(REMINDER_KEY, false)
             if (enabled) {
-                context?.let { alarmReceiver.setRepeatingAlarm(it, "Yuk dibuka aplikasinya!") }
+                context?.let { alarmReceiver.setRepeatingAlarm(it) }
             } else {
                 context?.let { alarmReceiver.cancelAlarm(it) }
             }

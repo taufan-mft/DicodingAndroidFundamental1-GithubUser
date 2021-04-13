@@ -1,5 +1,6 @@
 package com.topanlabs.githubuser.viewmodel
 
+import android.database.Cursor
 import androidx.lifecycle.*
 import com.topanlabs.githubuser.db.UserEntity
 import com.topanlabs.githubuser.repository.UserRepository
@@ -23,6 +24,10 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
     suspend fun isLiked(username: String): Boolean {
         val count: Int = repository.searchUser(username)
         return count > 0
+    }
+
+    suspend fun getCursor(): Cursor {
+        return repository.getLikedCursor()
     }
 }
 

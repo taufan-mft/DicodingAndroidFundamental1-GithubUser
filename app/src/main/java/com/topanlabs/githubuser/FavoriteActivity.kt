@@ -1,12 +1,16 @@
 package com.topanlabs.githubuser
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.topanlabs.githubuser.viewmodel.UserViewModel
 import com.topanlabs.githubuser.viewmodel.UserViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class FavoriteActivity : AppCompatActivity() {
     private lateinit var rvFavorite: RecyclerView
@@ -26,6 +30,10 @@ class FavoriteActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.favorites)
         userViewModel.allLikedUsers.observe(this) { users ->
             users.let { listUserAdapter.setFavoriteData(it) }
+        }
+        GlobalScope.launch(Dispatchers.Main) {
+            val farin = userViewModel.getCursor()
+            Log.d("farin", farin.toString())
         }
     }
 

@@ -9,4 +9,12 @@
     <string name="petunjuk">Cari pengguna menggunakan tombol cari diatas.</string>
     <string name="gaketemu">Pengguna tidak ditemukan.</string>
     <string name="gada">Tidak ada data.</string>
+    <string name="favorites">Favorit</string>
+    <string name="turn_reminder">Nyalakan pengingat?</string>
+    <string name="reminder_summary">Kami akan mengirimkan notifikasi tiap jam 9 pagi untuk kembali ke app.</string>
+    <string name="settings">Settings</string>
+    <string name="reminder_off_toast">Pengingat dimatikan.</string>
+    <string name="reminder_on_toast">Pengingat dinyalakan.</string>
+    <string name="check_out">Hai, lihat ini!</string>
+    <string name="something_new">Kami mempunyai sesuatu yang baru untukmu!</string>
 </resources>
