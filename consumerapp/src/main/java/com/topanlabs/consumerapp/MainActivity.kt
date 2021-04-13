@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,7 +49,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         sUriMatcher.addURI(AUTHORITY, TABLE_NAME, 1)
-        Log.d("farin", sUriMatcher.match(CONTENT_URI).toString())
         contentResolver.registerContentObserver(CONTENT_URI, true, myObserver)
         loadNotesAsync()
     }
@@ -58,10 +56,7 @@ class MainActivity : AppCompatActivity() {
     private fun loadNotesAsync() {
         GlobalScope.launch(Dispatchers.Main) {
             val deferredNotes = async(Dispatchers.IO) {
-                // CONTENT_URI = content://com.dicoding.picodiploma.mynotesapp/note
-                Log.d("farin", CONTENT_URI.toString())
                 val cursor = contentResolver.query(CONTENT_URI, null, null, null, null)
-                Log.d("Farin", cursor.toString())
                 MappingHelper.mapCursorToArrayList(cursor)
 
             }
