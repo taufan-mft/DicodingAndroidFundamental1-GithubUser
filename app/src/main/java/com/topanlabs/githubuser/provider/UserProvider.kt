@@ -53,7 +53,7 @@ class UserProvider : ContentProvider() {
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-        val added: Long = when (1) {
+        val added: Long = when (USER_CODE) {
             sUriMatcher.match(uri) -> userRepository.insertProv(UserEntity.from(values!!))
             else -> 0
         }
@@ -62,7 +62,7 @@ class UserProvider : ContentProvider() {
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
-        val deleted: Int = when (1) {
+        val deleted: Int = when (USER_CODE) {
             sUriMatcher.match(uri) -> userRepository.deleteById(uri.lastPathSegment!!.toInt())
             else -> 0
         }
