@@ -73,6 +73,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context, channelId)
             .setContentTitle(title)
             .setContentText(message)
+            .setSmallIcon(R.drawable.ic_baseline_favorite_24)
             .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
             .setSound(alarmSound)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

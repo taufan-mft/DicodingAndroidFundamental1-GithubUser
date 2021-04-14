@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -93,7 +94,7 @@ class DetailActivity : AppCompatActivity() {
                 userViewModel.insert(user)
                 isLiked = true
                 fButton.setColorFilter(Color.WHITE)
-                GlobalScope.launch(Dispatchers.Main) {
+                lifecycleScope.launch(Dispatchers.Main) {
                     userEntity = userViewModel.getUser(username!!)
                 }
             }
