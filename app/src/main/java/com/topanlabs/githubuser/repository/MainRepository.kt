@@ -38,7 +38,7 @@ class MainRepository {
         try{
             user = githubApi.getUser(username)
         } catch(e: Exception){
-            return null
+          null
         }
         return user
     }

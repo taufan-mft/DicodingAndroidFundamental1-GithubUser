@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 class DetailActivity : AppCompatActivity() {
 
     companion object {
-        val IN_USERNAME = "username"
+        const val IN_USERNAME = "username"
 
         @StringRes
         private val TAB_TITLES = intArrayOf(
